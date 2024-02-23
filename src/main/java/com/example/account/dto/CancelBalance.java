@@ -7,14 +7,21 @@ import lombok.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
-public class UseBalance {
+public class CancelBalance {
+
+    /**
+     * {
+     *     "transactionId": 1,
+     *     "accountNumber": "1000000000",
+     *     "amount": 10000
+     * }
+     */
     @Getter
     @Setter
     @AllArgsConstructor
     public static class Request implements AccountLockIdInterface {
-        @NotNull
-        @Min(1)
-        private Long userId;
+        @NotBlank
+        private String transactionId;
 
         @NotBlank
         @Size(min = 10, max = 10)
@@ -26,6 +33,15 @@ public class UseBalance {
         private Long amount;
     }
 
+    /**
+     * {
+     *     "accountNumber": "1000000000",
+     *     "transactionResult":"S",
+     *     "transactionId":"c2345bb6adq12345fsd98asndfga"
+     *     "amount": 10000
+     *     "transactedAt":"2024-02-23T14:30:31.123456"
+     * }
+     */
     @Getter
     @Setter
     @NoArgsConstructor
